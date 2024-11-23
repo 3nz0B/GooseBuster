@@ -302,7 +302,7 @@ del SOURCES['Webcam']
 
 
 log_msg ('INFO',"Starting roboflow, connecting to inference server")
-rf = Roboflow(api_key="WNuhfG9SHqPnh5uNRC48")
+rf = Roboflow(api_key="###")
 project = rf.workspace().project("goosebuster")
 model = project.version(4, local="http://localhost:9001/").model
 
