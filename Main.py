@@ -41,19 +41,6 @@ def log_msg(msg_type,msg) :
 ####################################################################
 def get_USB_camera_img(image_file):
 
-
-# v4l2-ctl -d 2 --list-ctrls
-# v4l2-ctl -d 2 --list-formats-ext
-
-#cam = cv2.VideoCapture(usb_cam_id)  # top USB 2.0 port
-#cam.set(cv2.CAP_PROP_FRAME_WIDTH, 1920)
-#cam.set(cv2.CAP_PROP_FRAME_HEIGHT,1080)
-#ret, image = cam.read()
-#cv2.imwrite(image_file, image)
-#cam.release()
-
-# Cannot get good resolution with cv2
-
 if os.path.exists(image_file) : os.remove(image_file)
 
  cmd = f"fswebcam -r 1280x720 --no-banner {image_file} -d /dev/video{usb_cam_id}"
@@ -234,10 +221,8 @@ def GetSunRiseTime () :
 
 
  return (today_sr_est , today_ss_est)
- 
-##########################################################################
-###                 MAIN
-##########################################################################
+
+### MAIN ###
 
 log_msg ('INFO',"Init Relay 1")
 relay1 = LED(26)
@@ -271,8 +256,6 @@ if __name__ == '__main__' :
  'Webcam': ( 'get_USB_camera_img', 60 ,0,390,1280,330) ,
  'IPCam1': ( 'get_IPcam1', 65 ,0,300,1920,780) ,
  'IPCam2': ( 'get_IPcam2', 60 ,0,180,1920,900) ,
- 
- #'Nest' : ( 'get_nest_img', 60, 0 ,200,1024,376) ,
  }
 
 
@@ -411,11 +394,6 @@ while True:
  exec_time = time.time()-start_time
  if exec_time > 0.1 : print ('INFO', f"Loop took {exec_time:.1f} seconds")
   time.sleep( max(0,LOOP_DELAY-exec_time) )
- 
- 
- 
- 
- 
- 
+
  picam2.stop_preview()
  picam2.close()
